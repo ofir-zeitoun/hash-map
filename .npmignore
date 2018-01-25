@@ -1,0 +1,16 @@
+# Editors and IDEs
+.vscode
+.idea
+.vs
+
+# dependencies
+node_modules
+
+# tests
+test
+testing
+
+mocha.opts
+tsconfig.json
+tsconfig.spec.json
+tslint.json

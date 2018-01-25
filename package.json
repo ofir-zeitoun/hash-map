@@ -1,0 +1,54 @@
+{
+  "name": "hash-map",
+  "version": "0.0.1",
+  "description": "hash-map",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "prepublishOnly": "tsc -p ./ --outDir dist/",
+    "precommit": "tslint --project tsconfig.json src/**/*.ts && npm test",
+    "clean:tests": "rm -rf testing",
+    "start": "tsc && node dist/index.js",
+    "test": "npm run clean:tests && tsc -p tsconfig.spec.json && cross-env NODE_ENV=test mocha --opts ./mocha.opts",
+    "test:coverage": "npm run clean:tests && tsc -p tsconfig.spec.json && cross-env NODE_ENV=test nyc mocha --opts ./mocha.opts"
+  },
+  "repository": {
+    "url": "git+https://github.com/ofir-zeitoun/hash-map.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/ffi": "0.0.19",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.47",
+    "@types/ref": "0.0.28",
+    "@types/ref-struct": "0.0.28",
+    "chai": "^4.1.2",
+    "cross-env": "^5.1.0",
+    "husky": "^0.14.3",
+    "mocha": "^3.5.3",
+    "nyc": "^11.3.0"
+  },
+  "nyc": {
+    "exclude": [
+      "**/*.spec.ts",
+      "**/*.spec.js",
+      "test"
+    ],
+    "reporter": [
+      "html",
+      "text-summary"
+    ]
+  },
+  "dependencies": {
+    "hashcode": "^1.0.3"
+  },
+  "bugs": {
+    "url": "https://github.com/ofir-zeitoun/hash-map/issues"
+  },
+  "homepage": "https://github.com/ofir-zeitoun/hash-map#readme",
+  "author": "Ofir Zeitoun"
+}

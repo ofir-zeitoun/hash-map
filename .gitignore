@@ -1,0 +1,20 @@
+# Editors and IDEs
+.vscode
+.idea
+.vs
+
+# dependencies
+node_modules
+packages
+
+# compiled tests
+testing
+
+# build
+dist
+coverage
+.nyc_output
+
+# Personal configurations (may contain passwords and secret keys etc.)
+.typingsrc
+
