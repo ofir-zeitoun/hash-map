@@ -1,6 +1,6 @@
 {
   "name": "oz-hash-map",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Map which can handles objects as keys",
   "main": "./dist/index.js",
   "types": "./src/index.ts",
