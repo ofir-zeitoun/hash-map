@@ -1,7 +1,7 @@
 {
   "name": "hash-map",
   "version": "0.0.1",
-  "description": "hash-map",
+  "description": "Map which can handles objects as keys",
   "main": "./dist/index.js",
   "types": "./src/index.ts",
   "directories": {
