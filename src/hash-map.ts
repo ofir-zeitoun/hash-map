@@ -1,14 +1,11 @@
 import { hashCode } from 'hashCode'
-
+import * as deepEqual from 'deep-equal'
 const getHashCode = hashCode().value
-const NOT_FOUND: number = -1
-const DEFAULT_EQUILITY = (a, b) => a === b
 
 export default class HashMap<K, V> implements Map<K, V> {
 
   private readonly _map: Map<number, { key: K, value: V }[]>
-  public areEqual: (obj1: K, obj2: K) => boolean
-  public select: (obj: K) => any
+  public selectKey: (obj: K) => any
   private _size: number
 
   public get size(): number {
@@ -86,21 +83,20 @@ export default class HashMap<K, V> implements Map<K, V> {
   private find(key: K,
     onFound?: (list: { key: K, value: V }[], i: number) => void,
     onNotFound?: (hash: number) => void) {
-    const select = this.select || (x => x)
-    const hash = getHashCode(select(key))
-    let list = this._map.get(hash)
-    if (!list) {
-      onNotFound && onNotFound.bind(this)(hash)
-      return
-    }
-    const checkEqual = this.areEqual || DEFAULT_EQUILITY
-    for (let i = 0; i < list.length; i++) {
-      if (checkEqual(list[i].key, key)) {
-        onFound && onFound.bind(this)(list, i)
-        return
+    const select = this.selectKey || (x => x)
+    const keyToFind = select(key)
+    const selectHash = getHashCode(keyToFind)
+    let sameHashList = this._map.get(selectHash)
+    if (sameHashList) {
+      for (let i = 0; i < sameHashList.length; i++) {
+        if (deepEqual(keyToFind, select(sameHashList[i].key))) {
+          onFound && onFound.bind(this)(sameHashList, i)
+          return
+        }
       }
+  
     }
-    onNotFound && onNotFound.bind(this)(hash)
+    onNotFound && onNotFound.bind(this)(selectHash)
   }
 
   get(key: K): V {
@@ -124,8 +120,7 @@ export default class HashMap<K, V> implements Map<K, V> {
       h => { 
         let list = this._map.get(h)
         if (!list) {
-          list = []
-          this._map.set(h, list)
+          this._map.set(h, list = [])
         }
         list.push({ key, value })
         this._size++

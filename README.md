@@ -1,10 +1,8 @@
 # hash-map
 Map which can handles objects as keys.
 
-```HashMap``` let you decide how to search for key, and how to decide how to check for equality:
-* ***areEqual: Function(a, b)***
-  <br>function to check if two objects are equal
-* ***select: Function(obj): any*** 
+```HashMap``` let you decide how to search for key:
+* ***selectKey: Function(obj): any*** 
   <br>function to select what to use as key
 
 ```HashMap``` implements all [Map interface](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map):
@@ -42,20 +40,9 @@ javascript
 var HashMap = require('oz-hash-map');
 ```
 ### Usage
+
 ``` typescript
 let map = new HashMap()
-map.set({ x:1 }, 'some value') // map.size = 1
-let res1 = map.get({ x:1 }) // res1 will be undefined
-
-map.set({ x:1 }, 'override value') // map.size = 2
-```
-
-Above example shows that ```{ x:1 }``` are two deferent instances.
-
-Next example will sovle this issue:
-``` typescript
-let map = new HashMap()
-map.areEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 
 map.set({ x:1 }, 'some value') // map.size = 1
 let res1 = map.get({ x:1 }) // res1 will be 'some value'
@@ -68,7 +55,7 @@ let res2 = map.get({ x:1 }) // res1 will be 'override value'
 ``` typescript
 let map = new HashMap()
 map.set({ x:1 }, 'some value') 
-map.set({ x:1 }, 'override value')
+map.set({ x:2 }, 'other value')
 
 for (let [k, v] of map){
   console.log(k, v)
@@ -76,29 +63,29 @@ for (let [k, v] of map){
 // output:
 // Object {x: 1}
 // some value
-// Object {x: 1}
-// override value
+// Object {x: 2}
+// other value
 
 for (let k of map.keys()){
   console.log(k)
 }
 // output:
 // Object {x: 1}
-// Object {x: 1}
+// Object {x: 2}
+
 for (let v of map.values()){
   console.log(v)
 }
 // output:
 // some value
-// override value
+// other value
 ```
 
-```HashMap``` let's you decide what to compare for equality:
+```HashMap``` let's you decide what to use as key:
 
 ``` typescript
 let map = new HashMap()
 let select = obj => { return { x: obj.x } }
-map.areEqual = (a, b) => JSON.stringify(select(a)) === JSON.stringify(select(b))
 map.select = select
 map.set({ x:1, y: 2 }, 'some value') 
 map.set({ x:1, z: 3 }, 'override value')

@@ -44,6 +44,7 @@
     ]
   },
   "dependencies": {
+    "deep-equal": "^1.0.1",
     "hashcode": "^1.0.3"
   },
   "bugs": {
