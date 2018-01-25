@@ -117,7 +117,10 @@ export default class HashMap<K, V> implements Map<K, V> {
 
   set(key: K, value: V): this {
     this.find(key,
-      (l, i) => { l[i].value = value },
+      (l, i) => { 
+        l[i].key = key
+        l[i].value = value
+       },
       h => { 
         let list = this._map.get(h)
         if (!list) {
