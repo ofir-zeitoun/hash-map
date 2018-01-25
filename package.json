@@ -1,5 +1,5 @@
 {
-  "name": "@oz/hash-map",
+  "name": "oz-hash-map",
   "version": "0.0.1",
   "description": "Map which can handles objects as keys",
   "main": "./dist/index.js",
