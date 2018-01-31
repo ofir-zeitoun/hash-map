@@ -86,7 +86,7 @@ for (let v of map.values()){
 ``` typescript
 let map = new HashMap()
 let select = obj => { return { x: obj.x } }
-map.select = select
+map.selectKey = select
 map.set({ x:1, y: 2 }, 'some value') 
 map.set({ x:1, z: 3 }, 'override value')
 // map will have only 1 item: { x:1, z: 3 }, 'override value'
