@@ -28,14 +28,14 @@ Map which can handles objects as keys.
   <br>Returns a new Iterator object that contains an array of [key, value] for each element in the Map object in insertion order.
 
 ### install
-``` $ npm install hashmap ```
+``` $ npm install oz-hash-map ```
 
 ### require / import
 typescript
 ``` typescript 
 import HashMap from 'oz-hash-map'
 ```
-javascript
+typescript
 ``` javascript
 var HashMap = require('oz-hash-map');
 ```
