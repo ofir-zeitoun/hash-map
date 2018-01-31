@@ -1,4 +1,4 @@
-import { hashCode } from 'hashCode'
+import { hashCode } from 'hashcode'
 import * as deepEqual from 'deep-equal'
 const getHashCode = hashCode().value
 
